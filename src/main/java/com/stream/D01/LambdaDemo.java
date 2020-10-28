@@ -3,8 +3,7 @@ package com.stream.D01;
 import org.junit.Test;
 
 /**
- * @Author: 曾睿
- * @Date: 2020/10/20 14:35
+ * 接口函数实现方式
  */
 public class LambdaDemo {
 
@@ -25,7 +24,7 @@ public class LambdaDemo {
 
 //02、start-----------------------------------
     /**
-     * 没有使用lambda
+     * 02没有使用lambda
      */
     //抽象功能接口
     interface Printer {
@@ -53,7 +52,7 @@ public class LambdaDemo {
 
 //03、start-----------------------------------
     /**
-     * 使用表达式
+     * 03使用表达式
      */
     @Test
     public void demo03() {
@@ -85,5 +84,55 @@ public class LambdaDemo {
         demo.printSomething( something, toPrint -> System.out.println(toPrint) );
     }
 //04、end-----------------------------------
+
+//05、start--------------------------------
+    interface A{
+        String a(int i, int j ,String str);
+    }
+
+    @Test
+    public void demo05() {
+        A a = new A() {
+            @Override
+            public String a(int i, int j, String str) {
+                System.out.println(i+j+str);
+                return str;
+            }
+        };
+        A a1 = (i, j, str) -> {
+            System.out.println(i+j+str);
+            return str;
+        };
+    }
+//05、end--------------------------------
+
+//06、start--------------------------------
+    interface B{
+        String a(int i, int j ,String str);
+        int a1(int i, String str);
+    }
+
+    @Test
+    public void demo06() {
+        B b = new B() {
+            @Override
+            public String a(int i, int j, String str) {
+                System.out.println(i+j+str);
+                return str;
+            }
+
+            @Override
+            public int a1(int i, String str) {
+                return i;
+            }
+        };
+
+        // 此时出现两个接口，则无法使用lambda表达式
+//        B b1 = (i, j, str) -> {
+//            System.out.println(i+j+str);
+//            return str;
+//        };
+    }
+//06、end--------------------------------
 
 }
