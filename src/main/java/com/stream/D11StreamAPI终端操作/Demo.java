@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.*;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -32,6 +33,17 @@ public class Demo {
                 .sorted()
                 .collect(toList());
         System.out.println(list);
+
+        List<String> lists = nameStrs.stream()
+                .filter(new Predicate<String>() {
+                    @Override
+                    public boolean test(String s) {
+                        return s.startsWith("L");
+                    }
+                })
+                .collect(toList());
+        System.out.println(list);
+
     }
 
 

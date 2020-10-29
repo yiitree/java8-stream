@@ -99,7 +99,11 @@ public class LambdaDemo {
                 return str;
             }
         };
+        // 省略了：new、方法名、返回类型、参数类型（会按顺序自动匹配）
+        // 返回的就是interface的对象，其实就相当于new对象，
+        // 所以一个lambda表达式可以new很中类接口，返回类型自己定，类似类型转换
         A a1 = (i, j, str) -> {
+            int v = 1;
             System.out.println(i+j+str);
             return str;
         };
@@ -135,4 +139,46 @@ public class LambdaDemo {
     }
 //06、end--------------------------------
 
+    interface C{
+        void c();
+    }
+
+    @Test
+    public void demo07() {
+
+        Runnable a = new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("沉默王二");
+            }
+        };
+
+        new Thread(a).start();
+
+        Runnable a1 = () -> System.out.println("沉默王二");
+
+        Runnable aa = new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        };
+
+
+        C a2 = () -> System.out.println("沉默王二");
+
+        new Thread(
+                () -> System.out.println("沉默王二")
+        ).start();
+    }
+
+    interface D{
+        int c(int i,int j);
+    }
+
+    //假如只有一行，可以省略return
+    @Test
+    public void demo08() {
+        D d = (i,j) -> i+j;
+    }
 }

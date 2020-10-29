@@ -30,6 +30,9 @@ public class Demo1 {
                 .stream()
                 //调用filter函数过滤数组元素，过滤方法使用lambda表达式，以L开头的元素返回true被保留，其他的List元素被过滤掉
                 .filter(s -> s.startsWith("L"))
+                .filter((s) -> {
+                    return s.startsWith("L");
+                })
                 //然后调用Map函数对管道流中每个元素进行处理，字母全部转换为大写
                 .map(String::toUpperCase)
                 //然后调用sort函数，对管道流中数据进行排序
@@ -50,6 +53,7 @@ public class Demo1 {
         String[] array = {"Monkey", "Lion", "Giraffe", "Lemur"};
         Stream<String> nameStrs2 = Stream.of(array);
         Stream<String> nameStrs3 = Stream.of("Monkey", "Lion", "Giraffe", "Lemur");
+
     }
 
     /**

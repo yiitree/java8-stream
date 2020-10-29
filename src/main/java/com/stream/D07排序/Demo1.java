@@ -84,11 +84,6 @@ public class Demo1 {
                         .reversed()
         );
         employees.forEach(System.out::println);
-
-
-
-
-
     }
 
 }

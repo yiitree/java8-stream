@@ -1,6 +1,7 @@
 package com.stream.D08函数式接口;
 
 import com.stream.D03filter与谓语逻辑.Employee;
+import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -12,6 +13,7 @@ import java.util.List;
  */
 public class Demo {
 
+    @Test
     public void demo(){
 
         Employee e1 = new Employee(1,23,"M","Rick","Beethovan");
@@ -71,11 +73,5 @@ public class Demo {
             return em1.getAge() - em2.getAge() > 0 ? -1:1;
         });
         employees.forEach(System.out::println);
-
-
-
     }
-
-
-
 }
