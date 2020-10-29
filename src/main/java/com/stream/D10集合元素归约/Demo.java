@@ -15,32 +15,26 @@ public class Demo {
     //nteger类型归约
     @Test
     public void Test(){
-        /**
+        /*
          * Identity标识：一个元素，它是归约操作的初始值，如果流为空，则为默认结果。
          * Accumulator累加器：具有两个参数的函数：归约运算的部分结果和流的下一个元素。
          * Combiner合并器（可选）：当归约并行化时，或当累加器参数的类型与累加器实现的类型不匹配时，用于合并归约操作的部分结果的函数。
          */
+        //21
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        int result = numbers.stream()
-                // 初始值 阶段累加结果 遍历的元素
-                .reduce(0, (subtotal, element) -> subtotal + element);
-        System.out.println(result);  //21
+        // 初始值 阶段累加结果 遍历的元素
+        int result = numbers.stream().reduce(0, (subtotal, element) -> subtotal + element);
+        int result1 = numbers.stream().reduce(0, Integer::sum);
 
-        int result1 = numbers.stream()
-                .reduce(0, Integer::sum);
-        System.out.println(result); //21
     }
 
     //String类型归约
     @Test
     public void Test01() {
+        //21
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        int result = numbers.stream()
-                .reduce(0, (subtotal, element) -> subtotal + element);
-        System.out.println(result);  //21
-        int result1 = numbers.stream()
-                .reduce(0, Integer::sum);
-        System.out.println(result); //21
+        int result = numbers.stream().reduce(0, (subtotal, element) -> subtotal + element);
+        int result1 = numbers.stream().reduce(0, Integer::sum);
     }
 
     //复杂对象归约
@@ -65,11 +59,9 @@ public class Demo {
         // 并行计算（推荐）速度快
         // 初始值 累加器 合并器
         // 合并器作用：并行运算其实就是把list拆开成几个，累加器计算每一组的结果，然后使用合并器把每组结果进行合并（此时也会进行二次规约，就是类型转换）
-        Integer reduce = employees.parallelStream().map(Employee::getAge).reduce(0, Integer::sum, Integer::sum);
-
+        Integer reduce = employees.parallelStream().map(Employee::getAge)
+                .reduce(0, Integer::sum, Integer::sum);
         Integer total3 = employees.stream()
                 .reduce(0,(totalAge,emp) -> totalAge + emp.getAge(),Integer::sum); //注意这里reduce方法有三个参数
-
-
     }
 }

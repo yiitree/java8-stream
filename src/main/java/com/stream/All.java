@@ -4,6 +4,7 @@ import com.stream.D03filter与谓语逻辑.Employee;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -33,7 +34,6 @@ public class All {
                 //并行处理
                 .parallel()
                 //函数过滤筛选 and or negate
-                // and()
                 .filter(e -> e.getAge() > 70 && e.getGender().equals("M"))
                 //对管道流中每个元素进行处理 map、peek
                 .map(e -> {
@@ -55,6 +55,21 @@ public class All {
                 .sorted()
                 //最后调用collect函数toList，将管道流转换为List返回
                 .collect(Collectors.toList());
+
+        // 匹配
+        boolean a= employees.stream().anyMatch(Employee.ageGreaterThan70);
+        // 查找
+        Optional<Employee> employeeOptional = employees.stream().filter(e -> e.getAge() > 40).findFirst();
+        // 是否查询到
+        boolean present = employeeOptional.isPresent();
+        // 查询到返回 对象
+        Employee employee1 = employeeOptional.get();
+        // 查询到返回 自定义操作
+        employeeOptional.ifPresent(System.out::println);
+        // 没查询到返回默认值
+        Employee employee = employeeOptional.orElse(new Employee(10, 45, "M", "Naveen", "Jain"));
+
+
     }
 
 }

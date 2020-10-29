@@ -45,8 +45,24 @@ public class Demo {
                     .collect(Collectors.toList());
             filteredLines.forEach(System.out::println);
         } catch (IOException e) {
-            e.printStackTrace();//只是测试用例，生产环境下不要这样做异常处理
+            e.printStackTrace();
         }
         //password
     }
+
+
+    @Test
+    public void demo1(){
+        int i = 1;
+        int j = 3;
+        int k = 5;
+
+        int sum = 10;
+
+
+    }
+
+
+
+
 }

@@ -63,30 +63,26 @@ public class Demo {
     @Test
     public void Test03() {
 
-        // 3.1.收集为Set
-        Set<String> collectToSet = Stream.of("Monkey", "Lion", "Giraffe", "Lemur", "Lion")
-                .collect(Collectors.toSet());
-        //最终collectToSet 中的元素是:[Monkey, Lion, Giraffe, Lemur]，注意Set会去重。
+        Stream<String> monkey = Stream.of("Monkey", "Lion", "Giraffe", "Lemur", "Lion");
 
+        // 3.1.收集为Set  注意Set会去重
+        Set<String> collectToSet = monkey.collect(Collectors.toSet());
 
         // 3.2.收集到List
-        List<String> collectToList = Stream.of("Monkey", "Lion", "Giraffe", "Lemur", "Lion")
-                .collect(Collectors.toList());
-        // 最终collectToList中的元素是: [Monkey, Lion, Giraffe, Lemur, Lion]
+        List<String> collectToList = monkey.collect(Collectors.toList());
 
         //3.3.通用的收集方式（使用构造方法） 转换为LinkedList、LinkedHashSet::new、PriorityQueue::new 等等
-        LinkedList<String> collectToCollection = Stream.of("Monkey", "Lion", "Giraffe", "Lemur", "Lion")
-                .collect(Collectors.toCollection(LinkedList::new));
-        //最终collectToCollection中的元素是: [Monkey, Lion, Giraffe, Lemur, Lion]
+        LinkedList<String> collectToCollection = monkey.collect(Collectors.toCollection(LinkedList::new));
 
         //3.4.收集到Array
-        String[] toArray = Stream.of("Monkey", "Lion", "Giraffe", "Lemur", "Lion")
-                .toArray(String[]::new);
-        //最终toArray字符串数组中的元素是: [Monkey, Lion, Giraffe, Lemur, Lion]
+        String[] toArray = monkey.toArray(String[]::new);
 
         //3.5.收集到Map
-        //使用Collectors.toMap()方法将数据元素收集到Map里面，但是出现一个问题：那就是管道中的元素是作为key，还是作为value。我们用到了一个Function.identity()方法，该方法很简单就是返回一个“ t -> t ”（输入就是输出的lambda表达式）。另外使用管道流处理函数distinct()来确保Map键值的唯一性。
-        Map<String, Integer> toMap = Stream.of("Monkey", "Lion", "Giraffe", "Lemur", "Lion")
+        //使用Collectors.toMap()方法将数据元素收集到Map里面，但是出现一个问题：
+        // 那就是管道中的元素是作为key，还是作为value。
+        // 我们用到了一个Function.identity()方法，该方法很简单就是返回一个“ t -> t ”（输入就是输出的lambda表达式）。
+        // 另外使用管道流处理函数distinct()来确保Map键值的唯一性。
+        Map<String, Integer> toMap = monkey
                 .distinct()
                 .collect(Collectors.toMap(
                             //元素输入就是输出，作为key
@@ -98,14 +94,14 @@ public class Demo {
 
         //3.6.分组收集groupingBy
         // Collectors.groupingBy用来实现元素的分组收集，下面的代码演示如何根据首字母将不同的数据元素收集到不同的List，并封装为Map。
-        Map<Character, List<String>> groupingByList =  Stream.of("Monkey", "Lion", "Giraffe", "Lemur", "Lion")
+        Map<Character, List<String>> groupingByList = monkey
                 .collect(Collectors.groupingBy(
                         // 分组条件: 根据元素首字母分组，相同的在一组
                         s -> s.charAt(0)
                 ));
         // 最终groupingByList内的元素: {G=[Giraffe], L=[Lion, Lemur, Lion], M=[Monkey]}
 
-        Map<Object, Long> groupingByLists =  Stream.of("Monkey", "Lion", "Giraffe", "Lemur", "Lion")
+        Map<Object, Long> groupingByLists =  monkey
                 .collect(Collectors.groupingBy(
                         // 分组条件: 根据元素首字母分组，相同的在一组
                         s -> s.charAt(0),
@@ -115,22 +111,22 @@ public class Demo {
         // 如果加上counting() ，结果是:  {G=1, L=3, M=1}
 
         //其他常用方法
-        // 判断管道中是否包含2，结果是: true
+        // 1.判断管道中是否包含2，结果是: true
         boolean containsTwo = IntStream.of(1, 2, 3).anyMatch(i -> i == 2);
 
-        // 管道中元素数据总计结果nrOfAnimals: 4
-        long nrOfAnimals = Stream.of("Monkey", "Lion", "Giraffe", "Lemur").count();
+        // 2.管道中元素数据总计结果nrOfAnimals: 4
+        long nrOfAnimals = monkey.count();
 
-        // 管道中元素数据累加结果sum: 6
+        // 3.管道中元素数据累加结果sum: 6
         int sum = IntStream.of(1, 2, 3).sum();
 
-        // 管道中元素数据平均值average: OptionalDouble[2.0]
+        // 4.管道中元素数据平均值average: OptionalDouble[2.0]
         OptionalDouble average = IntStream.of(1, 2, 3).average();
 
-        // 管道中元素数据最大值max: 3
+        // 5.管道中元素数据最大值max: 3
         int max = IntStream.of(1, 2, 3).max().orElse(0);
 
-        // 全面的统计结果statistics: IntSummaryStatistics{count=3, sum=6, min=1, average=2.000000, max=3}
+        // 6.全面的统计结果statistics: IntSummaryStatistics{count=3, sum=6, min=1, average=2.000000, max=3}
         IntSummaryStatistics statistics = IntStream.of(1, 2, 3).summaryStatistics();
 
     }

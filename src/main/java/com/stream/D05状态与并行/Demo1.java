@@ -2,6 +2,7 @@ package com.stream.D05状态与并行;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -38,8 +39,6 @@ public class Demo1 {
         List<String> alphabeticOrder = Stream.of("Monkey", "Lion", "Giraffe", "Lemur")
                 .sorted()
                 .collect(Collectors.toList());
-
-
     }
 
     //串行、并行与顺序
@@ -58,19 +57,18 @@ public class Demo1 {
         Stream.of("Monkey", "Lion", "Giraffe", "Lemur", "Lion")
                 .parallel()
                 .forEach(System.out::println);
+        new ArrayList<>().parallelStream();
+        new ArrayList<>().stream().parallel();
 
-        /**
+        /*
          * 数据源易拆分：从处理性能的角度，parallel()更适合处理ArrayList，而不是LinkedList。因为ArrayList从数据结构上讲是基于数组的，可以根据索引很容易的拆分为多个。
          *  推荐
-         *  ArrayList
-         *  HashMaps
+         *    ArrayList
+         *    HashMaps
          *  不好
-         *  LinkedList
-         *
+         *    LinkedList
          * 适用于无状态操作：每个元素的计算都不得依赖或影响任何其他元素的计算，的运算场景。
-         *
          * 基础数据源无变化：从文本文件里面边读边处理的场景，不适合parallel()并行处理。parallel()一开始就容量固定的集合，这样能够平均的拆分、同步处理。
-         *
          */
 
     }

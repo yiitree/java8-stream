@@ -51,6 +51,10 @@ public class Demo1 {
                 //mapToInt、maoToLong、mapToDouble
                 .mapToInt(String::length)
                 .forEach(System.out::println);
+
+        int[] ints = Stream.of("Monkey", "Lion", "Giraffe", "Lemur")
+                //mapToInt、maoToLong、mapToDouble
+                .mapToInt(String::length).toArray();
     }
 
     //处理对象数据格式转换

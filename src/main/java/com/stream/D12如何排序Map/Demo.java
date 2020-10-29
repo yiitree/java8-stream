@@ -8,15 +8,11 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
-/**
- * @Author: 曾睿
- * @Date: 2020/10/29 10:21
- */
 public class Demo {
 
     @Test
     public void Test01() {
-        //HashMap的merge()函数
+        // HashMap的merge()函数
 //        参数一：向map里面put的键
 //        参数二：向map里面put的值
 //        参数三：如果键发生重复，如何处理值。可以是一个函数，也可以写成lambda表达式。
@@ -24,7 +20,7 @@ public class Demo {
         HashMap<String, Integer> map = new HashMap<String, Integer>() {{
             put(k, 1);
         }};
-        //返回旧值oldVal加上新值newVal(1+2)，现在map里面只有一项元素那就是k:3。
+        // 返回旧值oldVal加上新值newVal(1+2)，现在map里面只有一项元素那就是k:3。
         map.merge(k, 2, (oldVal, newVal) -> oldVal + newVal);
     }
 

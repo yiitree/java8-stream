@@ -53,7 +53,6 @@ public class Demo1 {
         String[] array = {"Monkey", "Lion", "Giraffe", "Lemur"};
         Stream<String> nameStrs2 = Stream.of(array);
         Stream<String> nameStrs3 = Stream.of("Monkey", "Lion", "Giraffe", "Lemur");
-
     }
 
     /**
