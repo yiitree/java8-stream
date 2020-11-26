@@ -13,6 +13,16 @@ import java.util.List;
  */
 public class Demo1 {
 
+    /**
+     * 自然排序，和流无关
+     * sort(可以传递默认参数，默认设置好的比较方法)
+     * list.sort()
+     *
+     * 流中传递的排序方法
+     * sorted(自定义或者默认比较器)
+     * stream.sorted()
+     */
+
     @Test
     public void demo(){
         List<String> cities = Arrays.asList(

@@ -43,17 +43,19 @@ public class Demo {
                 })
                 .collect(toList());
         System.out.println(list);
-
     }
 
 
     //二、ForEach和ForEachOrdered
+    //steam.forEach()和list.forEach()不一样哈
     @Test
     public void Test02() {
+        // 顺序不一致 (steam.forEach()和list.forEach()不一样哈)
         //如果我们只是希望将Stream管道流的处理结果打印出来，而不是进行类型转换，我们就可以使用forEach()方法或forEachOrdered()方法。
         Stream.of("Monkey", "Lion", "Giraffe", "Lemur", "Lion").parallel().forEach(System.out::println);
 
-        // forEachOrdered从名字上看就可以理解，虽然在数据处理顺序上可能无法保障，
+        // 顺序一致
+        // forEach从名字上看就可以理解，虽然在数据处理顺序上可能无法保障，
         // 但是forEachOrdered方法可以在元素输出的顺序上保证与元素进入管道流的顺序一致。
         // 也就是下面的样子（forEach方法则无法保证这个顺序）：
         Stream.of("Monkey", "Lion", "Giraffe", "Lemur", "Lion").parallel().forEachOrdered(System.out::println);

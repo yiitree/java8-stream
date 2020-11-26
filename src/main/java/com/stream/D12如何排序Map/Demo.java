@@ -6,12 +6,20 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Demo {
 
+    private static final Pattern compile = Pattern.compile("regex");
+
     @Test
     public void Test01() {
+
+        boolean matches1 = compile.matcher("").matches();
+        boolean matches = "".matches("");
+        Pattern.matches("regex", "");
+
         // HashMap的merge()函数
 //        参数一：向map里面put的键
 //        参数二：向map里面put的值
@@ -81,6 +89,8 @@ public class Demo {
         //Germany=49
         //Pakistan=92
         //United States=1
+
+
 
     }
 }
